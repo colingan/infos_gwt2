@@ -1,0 +1,16 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+
+	<g:HTMLPanel styleName="wrap">
+		<g:HTMLPanel styleName="wrap-top">
+			<g:HTMLPanel ui:field="header"></g:HTMLPanel>
+		</g:HTMLPanel>
+		<g:HTMLPanel styleName="wrap-body">
+			<g:FlowPanel ui:field="body"></g:FlowPanel>
+		</g:HTMLPanel>
+		<g:HTMLPanel styleName="footer" ui:field="footer">
+			<div>©2015 - 2025 Colin Gan</div>
+		</g:HTMLPanel>
+	</g:HTMLPanel>
+</ui:UiBinder>

@@ -1,0 +1,34 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'war'
+group = systemProjectGroup
+version = systemProjectVersion
+
+apply from: 'shared.gradle'
+apply from: 'gwt.gradle'
+
+def shareHome = System.getenv()['SHARE_HOME']
+[compileJava, javadoc, compileTestJava]*.options*.encoding = 'UTF-8'
+
+war {
+	archiveName = 'infos.war'
+}
+
+// By default, SNAPSHOT dependencies are cached and updated once every 24 hours. 
+// If you require a SNAPSHOT dependency to be updated on every build, you can do:
+configurations.all {
+    resolutionStrategy.cacheChangingModulesFor 1, 'seconds'
+}
+
+dependencies {
+
+    compile files('libs/lib/*.jar')
+		
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+    testRuntime 'javax.servlet:servlet-api:2.5'
+    testCompile 'org.mockito:mockito-all:1.9.5'
+    testCompile 'org.powermock:powermock-api-mockito:1.6.2'
+    testCompile 'org.powermock:powermock-module-junit4:1.6.2'
+}
+
+build.dependsOn(copylibs)

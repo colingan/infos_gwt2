@@ -1,0 +1,94 @@
+// 使用gwt插件，还需要在build.gradle添加以下内容：
+// 1. apply plugin: 'war'
+// 2. apply from: 'gwt.gradle'
+// 3. 定义打包文件名
+// war {
+//  	archiveName = 'infos.war'
+// }
+
+ext {
+	gwtVersion = "2.6.0"
+	gwtBuildDir = "war"
+	gwtClassesDir = "${gwtBuildDir}/WEB-INF/classes"
+	gwtLibDir = "${gwtBuildDir}/WEB-INF/lib"
+}
+
+dependencies {
+    // gwt
+    providedCompile module("com.google.gwt:gwt-servlet:${gwtVersion}") {
+		dependency "com.google.gwt:gwt-user:${gwtVersion}"
+		dependency "com.google.gwt:gwt-dev:${gwtVersion}"
+	}
+}
+
+eclipse {
+	project {
+		natures "org.eclipse.jdt.core.javanature"
+		natures "com.google.gwt.eclipse.core.gwtNature"
+		
+		buildCommand "com.google.gdt.eclipse.core.webAppProjectValidator"
+		buildCommand "com.google.gwt.eclipse.core.gwtProjectValidator"
+	}
+	
+	classpath {
+		defaultOutputDir = file(gwtClassesDir)
+		containers "com.google.gwt.eclipse.core.GWT_CONTAINER"
+	}
+}
+
+task gwtc(dependsOn: 'classes', type:JavaExec) {
+	main = 'com.google.gwt.dev.Compiler'
+	classpath = sourceSets.main.runtimeClasspath
+	classpath sourceSets.main.java.srcDirs
+	
+	jvmArgs '-Xms512M'
+	jvmArgs '-Xmx1024M'
+	
+	// Additional arguments like -style PRETTY or -logLevel DEBUG
+	args ['-compileReport']
+	
+	// The number of local Threads to use when compiling permutations
+	// 线程数量，数值大则编译线程多，耗费内存多，易造成内存不足编译失败
+	args ['-localWorkers 2']
+	args 'com.github.colingan.infos_gwt'
+}
+
+task svnLog(type: Exec) {
+	commandLine 'svn', 'log', '-l1', '-q'
+	
+	standardOutput = new ByteArrayOutputStream()
+
+	ext.output = {
+		 def s = standardOutput.toString().trim()
+		 s = s.split('\n')[1];
+		 s = s.split(' ')[0]
+		 return s
+	}
+}
+
+war {
+	webAppDirName = 'war'
+	
+	try {
+		svnLog.execute()
+    def svnRev = svnLog.output()
+    ext.buildInfo = ", build: $svnRev"
+	} catch (any) {
+		ext.buildInfo = "ERR" + any
+	}
+	
+	manifest {
+			attributes "Implementation-Title": project.group + ":" + project.name
+			attributes "Implementation-Version": project.version
+
+			def now = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())
+			attributes "Implementation-Build": "$now$buildInfo"
+			attributes "Implementation-Vendor": "Tencent, Inc."
+
+			attributes "Built-By": System.getProperty("user.name")
+
+			attributes "Created-By": "Gradle"
+	}
+}
+
+war.dependsOn(gwtc)

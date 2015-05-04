@@ -1,0 +1,28 @@
+<!--
+	module of infos_gwt.
+-->
+
+<module rename-to='infos_gwt'>
+
+  	<!-- Inherit the core Web Toolkit stuff.  -->
+	<inherits name="com.google.gwt.user.User" />
+	<inherits name="com.google.gwt.i18n.I18N"/>
+	<inherits name="com.google.gwt.inject.Inject"/>
+	<inherits name="com.google.gwt.xml.XML" />
+	<inherits name="com.google.gwt.json.JSON" />
+	
+	<!-- gdt -->
+	<inherits name="com.soso.tg.cmvp.cMVP" />
+	<inherits name='com.soso.tg.widget.tgwidgets' />
+	
+  	<!-- Other module inherits        -->
+  	<inherits name="com.google.gwt.core.Core" />     
+  	<inherits name="gwtupload.GWTUpload" /> 
+  	
+  	<!-- Specify the app entry point class.                         -->
+  	<entry-point class='com.github.colingan.client.infos_gwt'/>
+  
+	<source path="client" />
+	<source path="shared" />
+
+</module>

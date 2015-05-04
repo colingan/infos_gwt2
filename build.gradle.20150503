@@ -1,0 +1,68 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'war'
+group = systemProjectGroup
+version = systemProjectVersion
+
+apply from: 'shared.gradle'
+apply from: 'gwt.gradle'
+
+def shareHome = System.getenv()['SHARE_HOME']
+[compileJava, javadoc, compileTestJava]*.options*.encoding = 'UTF-8'
+
+war {
+	archiveName = 'infos.war'
+}
+
+// By default, SNAPSHOT dependencies are cached and updated once every 24 hours. 
+// If you require a SNAPSHOT dependency to be updated on every build, you can do:
+configurations.all {
+    resolutionStrategy.cacheChangingModulesFor 1, 'seconds'
+}
+
+dependencies {
+    // database
+    runtime 'mysql:mysql-connector-java:5.1.29'
+    
+    // gdt
+    compile 'gdt.infra.gwt:tg-cmvp:1.0.1'
+    compile 'gdt.infra.tg:tg-widgets:1.0-SNAPSHOT'
+    compile 'gdt.adx:dmp-service:1.0.3-SNAPSHOT'
+    
+    // logging
+	compile 'org.slf4j:slf4j-api:1.6.4'
+	runtime 'ch.qos.logback:logback-classic:1.1.2'
+	
+    // apache commons
+    compile 'commons-codec:commons-codec:1.4'
+    compile 'commons-lang:commons-lang:2.6'
+    
+    // google
+    compile 'com.google.code.gson:gson:2.3.1'
+    compile 'com.google.guava:guava:18.0'
+    compile 'com.googlecode.gwtupload:gwtupload:1.0.3'
+    
+    // ebean
+    compile 'org.avaje.ebeanorm:avaje-ebeanorm:3.1.2'
+    
+    // guice inject
+    compile 'javax.inject:javax.inject:1'
+    compile 'com.google.inject:guice:3.0'
+    compile 'aopalliance:aopalliance:1.0'
+    compile 'com.google.inject.extensions:guice-multibindings:3.0'
+    compile 'com.google.gwt.inject:gin:2.1.2'
+    compile 'com.google.inject.extensions:guice-assistedinject:3.0'
+    compile 'com.google.inject.extensions:guice-servlet:3.0'
+    
+    // groovy
+    compile 'org.codehaus.groovy:groovy-all:2.4.3'
+
+		
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+    testRuntime 'javax.servlet:servlet-api:2.5'
+    testCompile 'org.mockito:mockito-all:1.9.5'
+    testCompile 'org.powermock:powermock-api-mockito:1.6.2'
+    testCompile 'org.powermock:powermock-module-junit4:1.6.2'
+}
+
+build.dependsOn(copylibs)
