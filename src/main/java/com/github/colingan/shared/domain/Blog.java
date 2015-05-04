@@ -22,6 +22,7 @@ public class Blog implements Serializable {
 	private String content_;
 	private Date add_time_;
 	private Date update_time_;
+	private boolean is_del_;
 	
 	public long getId_() {
 		return id_;
@@ -70,6 +71,12 @@ public class Blog implements Serializable {
 	}
 	public void setUpdate_time_(Date update_time_) {
 		this.update_time_ = update_time_;
+	}
+	public boolean isIs_del_() {
+		return is_del_;
+	}
+	public void setIs_del_(boolean is_del_) {
+		this.is_del_ = is_del_;
 	}
 
 }

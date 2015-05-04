@@ -26,7 +26,7 @@ public class Category implements Serializable {
 	private String name_;
 	private int level_;
 	private long parent_category_;
-	private int is_del_;
+	private boolean is_del_;
 	private Date add_time_;
 	private Date update_time_;
 	private String update_user_;
@@ -66,11 +66,11 @@ public class Category implements Serializable {
 		this.parent_category_ = parent_category_;
 	}
 
-	public int getIs_del_() {
+	public boolean getIs_del_() {
 		return is_del_;
 	}
 
-	public void setIs_del_(int is_del_) {
+	public void setIs_del_(boolean is_del_) {
 		this.is_del_ = is_del_;
 	}
 

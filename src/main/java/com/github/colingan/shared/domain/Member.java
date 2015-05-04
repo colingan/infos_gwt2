@@ -18,7 +18,7 @@ public class Member implements Serializable {
 	private String real_name_;
 	private String user_name_;
 	private int role_group_;
-	private int is_del_;
+	private boolean is_del_;
 	private Date add_time_;
 	private Date update_time_;
 
@@ -56,11 +56,11 @@ public class Member implements Serializable {
 		this.role_group_ = role_group_;
 	}
 
-	public int getIs_del_() {
+	public boolean getIs_del_() {
 		return is_del_;
 	}
 
-	public void setIs_del_(int is_del_) {
+	public void setIs_del_(boolean is_del_) {
 		this.is_del_ = is_del_;
 	}
 

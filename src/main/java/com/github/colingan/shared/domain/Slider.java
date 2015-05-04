@@ -18,7 +18,7 @@ public class Slider implements Serializable {
 	private int idx_;
 	private String origin_name_;
 	private String dest_name_;
-	private int is_del_;
+	private boolean is_del_;
 	private Date add_time_;
 	private Date update_time_;
 	public long getId_() {
@@ -45,10 +45,10 @@ public class Slider implements Serializable {
 	public void setDest_name_(String dest_name_) {
 		this.dest_name_ = dest_name_;
 	}
-	public int getIs_del_() {
+	public boolean getIs_del_() {
 		return is_del_;
 	}
-	public void setIs_del_(int is_del_) {
+	public void setIs_del_(boolean is_del_) {
 		this.is_del_ = is_del_;
 	}
 	public Date getAdd_time_() {
