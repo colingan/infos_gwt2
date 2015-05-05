@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.google.common.base.Objects;
+
 /**
  * blog category for ones123
  * 
@@ -98,5 +100,21 @@ public class Category implements Serializable {
 		this.update_user_ = update_user_;
 	}
 
+  @Override
+  public int hashCode() {
+    return Objects.hashCode(id_);
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (obj == null) {
+      return false;
+    }
+    if (!(obj instanceof Category)) {
+      return false;
+    }
+    Category other = (Category) obj;
+    return id_ == other.id_;
+  }
 
 }

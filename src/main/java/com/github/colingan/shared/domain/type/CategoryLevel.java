@@ -30,4 +30,8 @@ public enum CategoryLevel {
   public static boolean validateCategoryLevel(int value) {
     return VALUE_MAP.containsKey(Integer.valueOf(value));
   }
+
+  public static final CategoryLevel getByValue(int value) {
+    return VALUE_MAP.get(value);
+  }
 }
