@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.google.common.base.Objects;
-
 /**
  * blog category for ones123
  * 
@@ -102,7 +100,7 @@ public class Category implements Serializable {
 
   @Override
   public int hashCode() {
-    return Objects.hashCode(id_);
+    return Long.valueOf(id_).hashCode();
   }
 
   @Override

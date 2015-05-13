@@ -37,11 +37,11 @@ public class AppUtil {
   }
 
   public static final long getUin() {
-    return getPageInitData().getUid();
+    return getPageInitData().getUser().getUid();
   }
 
   public static final String getUserName() {
-    return getPageInitData().getUserName();
+    return getPageInitData().getUser().getN();
   }
 }
 

@@ -5,10 +5,10 @@ import java.util.Map;
 
 public enum RoleGroup {
 
-	ANOY(-1), // 匿名
-	READ_ONLY(0), // 只读组
-	READ_WRITE(1), // 发布组
-	ADMIN(2) // 管理员
+  ANOY(-1), // 匿名
+  READ_ONLY(0), // 只读组
+  READ_WRITE(1), // 发布组
+  ADMIN(2) // 管理员
 	;
 
 	private static final Map<Integer, RoleGroup> VALUE_MAP = new HashMap<Integer, RoleGroup>() {
@@ -32,4 +32,8 @@ public enum RoleGroup {
 	public static boolean validateRoleGroupValue(int value) {
 		return VALUE_MAP.containsKey(Integer.valueOf(value));
 	}
+
+  public static RoleGroup valueOf(int value) {
+    return VALUE_MAP.get(value);
+  }
 }

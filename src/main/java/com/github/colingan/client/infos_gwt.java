@@ -24,21 +24,21 @@ import com.soso.tg.cmvp.client.squeeze.Token;
  */
 public class infos_gwt implements EntryPoint {
 
-    @Override
-    public void onModuleLoad() {
+  @Override
+  public void onModuleLoad() {
 
-//      // ��ȡ��¼�û���Ϣ
-//      RpcHolder.getPageRPC().getInitData(Window.Location.getHref(), new AsyncCallback<PageInitData>() {
-//          
-//          @Override
-//          public void onSuccess(PageInitData result) {
-//            Element ele = DOM.getElementById("loading");
-//            if (ele != null) {
-//              ele.removeFromParent();
-//            }
-//            // no login requires
-//            AppUtil.setPageInitData(result);
-//            RpcUtils.addRpcToken(RpcHolder.getPageRPC());
+    RpcHolder.getPageRPC().getInitData(Window.Location.getHref(),
+        new AsyncCallback<PageInitData>() {
+
+          @Override
+          public void onSuccess(PageInitData result) {
+            Element ele = DOM.getElementById("loading");
+            if (ele != null) {
+              ele.removeFromParent();
+            }
+            // no login requires
+            AppUtil.setPageInitData(result);
+            RpcUtils.addRpcToken(RpcHolder.getPageRPC());
             new AppController(new InfosPageFactoryAsync(), new HistoryObserver() {
 
               @Override
@@ -48,14 +48,14 @@ public class infos_gwt implements EntryPoint {
 
               }
             }).start(AppConstants.Page.IndexPage + "/" + AppConstants.IndexPage.State.Index);
-//          }
-//          
-//          @Override
-//          public void onFailure(Throwable caught) {
-//
-//            Window.alert("ҳ���ʼ��ʧ�ܣ�" + caught.getMessage());
-//            return;
-//          }
-//        });
-    }
+            }
+
+          @Override
+          public void onFailure(Throwable caught) {
+
+            Window.alert("页面加载失败" + caught.getMessage());
+            return;
+              }
+        });
+  }
 }

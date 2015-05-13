@@ -8,8 +8,8 @@ package com.github.colingan.shared;
 
 import java.io.Serializable;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import com.github.colingan.shared.domain.type.RoleGroup;
+import com.github.colingan.shared.domain.vo.CookieUser;
 
 
  /**
@@ -29,34 +29,22 @@ public class PageInitData implements Serializable {
     OK, NotLogin;
   }
 
-  // 登录信息，由Token设置
-  private long uid; // 用户id，infos系统uid
-  private long loginTime; // 登录时间，毫秒
-  private String xsrfToken; // Xsrf验证token
-  private PageStatus pageStatus; // 登录状态
+  private long loginTime; // 锟斤拷录时锟戒，锟斤拷锟斤拷
+  private String xsrfToken; // Xsrf锟斤拷证token
+  private PageStatus pageStatus; // 锟斤拷录状态
 
-  // 用户信息，由PageRPC设置
-  private String userName; // 用户名
-  private String department; // 部门名
+  // 锟矫伙拷锟斤拷息锟斤拷锟斤拷PageRPC锟斤拷锟斤拷
+  private CookieUser user;
+  private RoleGroup role;
 
   public PageInitData() {
 
   }
 
-  public PageInitData(long userId) {
-    this.uid = userId;
+  public PageInitData(CookieUser user) {
+    this.user = user;
     this.loginTime = System.currentTimeMillis();
     this.pageStatus = PageStatus.OK;
-  }
-
-  public long getUid() {
-
-    return uid;
-  }
-
-  public void setUid(long uid) {
-
-    this.uid = uid;
   }
 
   public long getLoginTime() {
@@ -89,30 +77,25 @@ public class PageInitData implements Serializable {
     this.pageStatus = pageStatus;
   }
 
-  public String getUserName() {
+  public CookieUser getUser() {
 
-    return userName;
+    return user;
   }
 
-  public void setUserName(String userName) {
-
-    this.userName = userName;
-  }
-
-  public String getDepartment() {
-
-    return department;
-  }
-
-  public void setDepartment(String department) {
-
-    this.department = department;
-  }
+  public void setUser(CookieUser user) {
   
-  @Override
-  public String toString() {
-    
-    return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    this.user = user;
   }
+
+  public RoleGroup getRole() {
+
+    return role;
+  }
+
+  public void setRole(RoleGroup role) {
+
+    this.role = role;
+  }
+
 }
 

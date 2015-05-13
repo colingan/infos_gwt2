@@ -6,9 +6,6 @@
 
 package com.github.colingan.client.common.rpc.exception;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 
@@ -66,9 +63,5 @@ public class RpcException extends RuntimeException implements IsSerializable {
     this.message = message;
   }
 
-  @Override
-  public String toString() {
-    return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-  }
 }
 

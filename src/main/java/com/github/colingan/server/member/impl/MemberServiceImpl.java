@@ -44,7 +44,7 @@ public class MemberServiceImpl implements MemberService {
     Member member = infosServer.find(Member.class)//
         .where()//
         .eq("user_name_", userName)//
-        .eq("is_del", false)//
+        .eq("is_del_", false)//
         .findUnique();
 
     if (member == null) {

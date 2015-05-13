@@ -38,7 +38,7 @@ public class RpcUtils {
     @Override
     public void onRpcTokenException(RpcTokenException e) {
       GWT.log("onError " + e);
-      Window.alert("Ò³Ãæ¹ıÆÚ£¬½«ÖØĞÂµÇÂ¼¡£");
+      Window.alert("é¡µé¢è¿‡æœŸï¼Œå°†é‡æ–°ç™»å½•ã€‚");
       Window.Location.reload();
     }
 
