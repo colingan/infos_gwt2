@@ -29,13 +29,21 @@ public interface AppConstants extends Constants {
   }
 
   public final static class Page {
-    public final static String IndexPage = "index"; // ��ҳ
+    public final static String IndexPage = "index"; // 首页
+    public final static String BlogPage = "blog"; // 文章页
 
   }
 
   public final static class IndexPage {
     public final static class State {
       public final static String Index = "index"; // ��ҳ
+    }
+  }
+
+  public final static class BlogPage {
+    public final static class State {
+      public final static String Edit = "edit"; // 编辑
+      public final static String View = "view"; // 查看
     }
   }
 
@@ -78,6 +86,10 @@ public interface AppConstants extends Constants {
     public final static String Footer = "footer";
 
     public final static String ViewIndexComponent = "index-view";
+
+    public final static String BlogComponent = "blog";
+    public final static String BlogViewComponent = "blog-view";
+    public final static String BlogEditComponent = "blog-edit";
   }
 
   public final static class Param {

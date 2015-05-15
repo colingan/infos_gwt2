@@ -1,0 +1,23 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<div class="blog-detail">
+		<form class="form-horizontal" role="form" method="POST" id="blog-form">
+			<g:Hidden ui:field="id"></g:Hidden>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">标题：</label>
+				<div class="col-sm-8">
+					<g:TextBox ui:field="title" styleName="form-control required"></g:TextBox>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label"></label>
+				<div class="col-sm-8">
+					<g:TextArea ui:field="content"></g:TextArea>
+				</div>
+			</div>
+			<g:Button ui:field="submit" styleName="btn btn-primary">提交</g:Button>
+			<g:Button ui:field="reset" styleName="btn btn-default">清空</g:Button>
+		</form>
+	</div>
+</ui:UiBinder>

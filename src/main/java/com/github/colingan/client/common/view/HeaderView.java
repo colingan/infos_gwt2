@@ -6,9 +6,12 @@
 
 package com.github.colingan.client.common.view;
 
-import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
+import com.github.colingan.client.common.InfosPresenter;
+import com.github.colingan.client.common.events.CategoryEnterEvent;
 import com.github.colingan.client.common.presenter.HeaderPresenter.View;
 import com.github.colingan.shared.domain.Category;
 import com.google.gwt.core.client.GWT;
@@ -16,7 +19,6 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiTemplate;
 import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.Widget;
@@ -42,42 +44,51 @@ public class HeaderView extends Composite implements View {
   @UiField
   MenuBar menus;
 
-  public HeaderView() {
+  private InfosPresenter presenter;
+
+  public HeaderView(InfosPresenter presenter) {
     initWidget(uiBinder.createAndBindUi(this));
+    this.presenter = presenter;
   }
 
 
   @Override
-  public void setMenuDatas(Map<Category, List<Category>> datas) {
+  public void setMenuDatas(Map<Category, Set<Category>> datas) {
 
-    // TODO Auto-generated method stub
-    this.mockDatas();
+    if (datas != null && datas.size() > 0) {
+      for (Entry<Category, Set<Category>> entry : datas.entrySet()) {
+        Category parent = entry.getKey();
+        MenuBar parentBar = new MenuBar(true);
+        for (Category child : entry.getValue()) {
+          parentBar.addItem(child.getName_(),
+              new CategoryEnterCommand(child.getId_(), parent.getId_()));
+        }
+        this.menus.addItem(parent.getName_(), parentBar);
+      }
+    }
   }
 
+  private class CategoryEnterCommand implements Command {
 
-  private void mockDatas() {
-    Command cmd = new Command() {
+    private long categoryId;
+    private long parentCategoryId;
 
-      @Override
-      public void execute() {
-        Window.alert("You selected a menu item");
-      }
+    public CategoryEnterCommand(long categoryId, long parentCategoryId) {
+      this.categoryId = categoryId;
+      this.parentCategoryId = parentCategoryId;
+    }
 
-    };
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.google.gwt.user.client.Command#execute()
+     */
 
-    // create submenus
-    MenuBar fooMenu = new MenuBar(true);
-    fooMenu.addItem("the", cmd);
-    fooMenu.addItem("foo", cmd);
-    fooMenu.addItem("menu", cmd);
+    @Override
+    public void execute() {
+      presenter.firePageEvent(new CategoryEnterEvent(this.parentCategoryId, this.categoryId));
+    }
 
-    MenuBar barMenu = new MenuBar(true);
-    barMenu.addItem("the", cmd);
-    barMenu.addItem("bar", cmd);
-    barMenu.addItem("menu", cmd);
-
-    menus.addItem("foo", fooMenu);
-    menus.addItem("bar", barMenu);
   }
 
   @Override

@@ -7,6 +7,8 @@
 package com.github.colingan.client.constants.rpcs;
 
 import com.github.colingan.client.RpcUtils;
+import com.github.colingan.client.category.rpc.CategoryRPC;
+import com.github.colingan.client.category.rpc.CategoryRPCAsync;
 import com.github.colingan.client.common.rpc.PageRPC;
 import com.github.colingan.client.common.rpc.PageRPCAsync;
 import com.google.gwt.core.client.GWT;
@@ -28,6 +30,15 @@ public class RpcHolder {
 
   public final static PageRPCAsync getPageRPC() {
     return PageRpcHolder.pageRPC;
+  }
+
+  static class CategoryRpcHolder {
+    private static CategoryRPCAsync categoryRPC = RpcUtils.createTimeoutRPC(GWT
+        .create(CategoryRPC.class));
+  }
+
+  public final static CategoryRPCAsync getCategoryRPC() {
+    return CategoryRpcHolder.categoryRPC;
   }
 }
 

@@ -6,8 +6,8 @@
 
 package com.github.colingan.client.category.rpc;
 
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.github.colingan.client.common.rpc.exception.RpcException;
 import com.github.colingan.shared.domain.Category;
@@ -25,6 +25,6 @@ import com.google.gwt.user.client.rpc.XsrfProtectedService;
 @RemoteServiceRelativePath("category")
 public interface CategoryRPC extends XsrfProtectedService {
 
-  public Map<Category, List<Category>> getCategoryBrief() throws RpcException;
+  public Map<Category, Set<Category>> getCategoryBrief() throws RpcException;
 }
 

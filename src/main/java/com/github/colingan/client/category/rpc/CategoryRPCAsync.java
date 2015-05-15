@@ -6,8 +6,8 @@
 
 package com.github.colingan.client.category.rpc;
 
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.github.colingan.shared.domain.Category;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -23,7 +23,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public interface CategoryRPCAsync {
 
-  void getCategoryBrief(AsyncCallback<Map<Category, List<Category>>> callback);
+  void getCategoryBrief(AsyncCallback<Map<Category, Set<Category>>> callback);
 
 }
 
